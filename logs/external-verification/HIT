@@ -1,0 +1,5 @@
+time=2026-11-11 09:25:36
+tag=xlog-hang
+iter=5
+serial=/workspace/validation/external_repro_verify_20261110/xlog-hang/serial-5.log
+execprog=/workspace/validation/external_repro_verify_20261110/xlog-hang/execprog-5.log

@@ -1,0 +1,76 @@
+{
+	"Count": 0,
+	"Nodes": {
+		"INFO: task hung in xlog_grant_head_check": {
+			"Count": 12,
+			"Nodes": {
+				"INFO: task hung in vfs_setxattr": {
+					"Count": 3,
+					"Nodes": {
+						"INFO: task hung in xlog_grant_head_check": {
+							"Count": 1,
+							"Nodes": {
+								"INFO: task hung in xlog_grant_head_check": {
+									"Count": 1,
+									"Nodes": {
+										"INFO: task hung in xfs_ilock": {
+											"Count": 1,
+											"Nodes": {
+												"INFO: task hung in xfs_ilock": {
+													"Count": 1,
+													"Nodes": null
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"INFO: task hung in vfs_unlink": {
+					"Count": 1,
+					"Nodes": null
+				},
+				"INFO: task hung in xfs_ilock": {
+					"Count": 1,
+					"Nodes": {
+						"INFO: task hung in xfs_ilock": {
+							"Count": 1,
+							"Nodes": {
+								"INFO: task hung in xlog_grant_head_check": {
+									"Count": 1,
+									"Nodes": null
+								}
+							}
+						}
+					}
+				},
+				"INFO: task hung in xlog_grant_head_check": {
+					"Count": 4,
+					"Nodes": {
+						"INFO: task hung in filename_unlinkat": {
+							"Count": 1,
+							"Nodes": {
+								"INFO: task hung in filename_unlinkat": {
+									"Count": 1,
+									"Nodes": {
+										"INFO: task hung in lookup_open": {
+											"Count": 1,
+											"Nodes": {
+												"INFO: task hung in lookup_open": {
+													"Count": 1,
+													"Nodes": null
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

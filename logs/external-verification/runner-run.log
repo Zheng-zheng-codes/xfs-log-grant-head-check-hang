@@ -1,0 +1,26 @@
+[2026-11-10 14:46:21] START tag=xlog-hang port=12743 procs=8 kernel=/workspace/linux-7.4-rc2/arch/x86/boot/bzImage
+[2026-11-10 14:46:21] programs: 67 entries, 2.6M
+[2026-11-10 14:46:21] iter=1 boot qemu_pid=2320178
+[2026-11-10 14:49:21] iter=1 ssh-up after 51s
+[2026-11-10 14:49:30] iter=1 exec-start attempt=1 (procs=8 repeat=0)
+[2026-11-11 00:35:27] START tag=xlog-hang port=12743 procs=8 kernel=/workspace/linux-7.4-rc2/arch/x86/boot/bzImage
+[2026-11-11 00:35:27] programs: 67 entries, 2.6M
+[2026-11-11 00:35:27] iter=1 qemu did not start (port busy?)
+[2026-11-11 00:35:57] iter=2 qemu did not start (port busy?)
+[2026-11-11 00:36:27] iter=3 qemu did not start (port busy?)
+[2026-11-11 00:36:43] iter=1 ended state=vmdead (no crash markers)
+[2026-11-11 00:36:44] iter=2 boot qemu_pid=2490721
+[2026-11-11 00:36:58] iter=4 qemu did not start (port busy?)
+[2026-11-11 00:37:28] iter=5 boot qemu_pid=2491009
+[2026-11-11 00:38:59] iter=2 ssh-up after 39s
+[2026-11-11 00:39:00] iter=5 ssh-up after 27s
+[2026-11-11 00:39:13] iter=5 exec-start attempt=1 (procs=8 repeat=0)
+[2026-11-11 00:39:14] iter=2 exec-start attempt=1 (procs=8 repeat=0)
+[2026-11-11 01:01:58] iter=2 execprog exited cleanly, retrying in same VM
+[2026-11-11 01:02:03] iter=2 exec-start attempt=2 (procs=8 repeat=0)
+[2026-11-11 09:24:53] iter=2 execprog exited cleanly, retrying in same VM
+[2026-11-11 09:24:58] iter=2 exec-start attempt=3 (procs=8 repeat=0)
+[2026-11-11 09:25:36] iter=5 TARGET-HIT serial=/workspace/validation/external_repro_verify_20261110/xlog-hang/serial-5.log
+[2026-11-11 09:25:36] FINISH tag=xlog-hang
+[2026-11-11 09:25:47] iter=2 OTHER-CRASH: [    3.204886][    T0] Spectre V2 : WARNING: Unprivileged eBPF is enabled with eIBRS on, data leaks possible via Spectre v2 BHB attacks!
+[2026-11-11 09:25:47] HIT already recorded

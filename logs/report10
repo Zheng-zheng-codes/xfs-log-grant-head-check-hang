@@ -1,0 +1,625 @@
+INFO: task syz.7.5413:93591 blocked for more than 143 seconds.
+      Tainted: G             L      7.4.0-rc2-kernsight-kasan #1
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:syz.7.5413      state:D stack:26008 pid:93591 tgid:93589 ppid:51167  task_flags:0x440140 flags:0x00080003
+Call Trace:
+ <TASK>
+ context_switch kernel/sched/core.c:5584 [inline]
+ __schedule+0x1425/0x6840 kernel/sched/core.c:7389
+ __schedule_loop kernel/sched/core.c:7466 [inline]
+ schedule+0xec/0x2d0 kernel/sched/core.c:7481
+ xlog_grant_head_wait+0x144/0xd00 fs/xfs/xfs_log.c:217
+ xlog_grant_head_check+0x57f/0x610 fs/xfs/xfs_log.c:279
+ xfs_log_reserve+0x303/0x8b0 fs/xfs/xfs_log.c:387
+ xfs_trans_reserve fs/xfs/xfs_trans.c:174 [inline]
+ xfs_trans_alloc+0x489/0xea0 fs/xfs/xfs_trans.c:260
+ xfs_trans_alloc_inode+0x19d/0x3f0 fs/xfs/xfs_trans.c:1088
+ xfs_attr_set+0x9d7/0x11f0 fs/xfs/libxfs/xfs_attr.c:1183
+ xfs_attr_change+0x37e/0x500 fs/xfs/xfs_xattr.c:128
+ xfs_xattr_set+0x16f/0x250 fs/xfs/xfs_xattr.c:186
+ __vfs_setxattr+0x17a/0x1e0 fs/xattr.c:223
+ __vfs_setxattr_noperm+0x12e/0x670 fs/xattr.c:257
+ __vfs_setxattr_locked+0x12c/0x300 fs/xattr.c:318
+ vfs_setxattr+0x160/0x3c0 fs/xattr.c:344
+ do_setxattr+0x172/0x1e0 fs/xattr.c:662
+ filename_setxattr+0x156/0x1c0 fs/xattr.c:690
+ path_setxattrat+0x1d1/0x2b0 fs/xattr.c:734
+ __do_sys_setxattr fs/xattr.c:768 [inline]
+ __se_sys_setxattr fs/xattr.c:764 [inline]
+ __x64_sys_setxattr+0xcb/0x140 fs/xattr.c:764
+ do_syscall_x64 arch/x86/entry/syscall_64.c:61 [inline]
+ do_syscall_64+0x132/0x7c0 arch/x86/entry/syscall_64.c:89
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
+RIP: 0033:0x7f0b3dbb2b7d
+RSP: 002b:00007f0b3bdf5f98 EFLAGS: 00000246 ORIG_RAX: 00000000000000bc
+RAX: ffffffffffffffda RBX: 00007f0b3de45fa0 RCX: 00007f0b3dbb2b7d
+RDX: 0000200000000800 RSI: 00002000000007c0 RDI: 0000200000000780
+RBP: 00007f0b3dc50273 R08: 0000000000000001 R09: 0000000000000000
+R10: 000000000000fffe R11: 0000000000000246 R12: 0000000000000000
+R13: 00007f0b3de46038 R14: 00007f0b3de45fa0 R15: 00007f0b3bdd6000
+ </TASK>
+INFO: task syz.7.5413:93781 blocked for more than 143 seconds.
+      Tainted: G             L      7.4.0-rc2-kernsight-kasan #1
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:syz.7.5413      state:D stack:28664 pid:93781 tgid:93589 ppid:51167  task_flags:0x400040 flags:0x00080002
+Call Trace:
+ <TASK>
+ context_switch kernel/sched/core.c:5584 [inline]
+ __schedule+0x1425/0x6840 kernel/sched/core.c:7389
+ __schedule_loop kernel/sched/core.c:7466 [inline]
+ schedule+0xec/0x2d0 kernel/sched/core.c:7481
+ schedule_preempt_disabled+0x18/0x30 kernel/sched/core.c:7538
+ rwsem_down_write_slowpath+0x3a9/0x12e0 kernel/locking/rwsem.c:1215
+ __down_write_common kernel/locking/rwsem.c:1347 [inline]
+ __down_write kernel/locking/rwsem.c:1356 [inline]
+ down_write+0x1d5/0x200 kernel/locking/rwsem.c:1632
+ inode_lock include/linux/fs.h:1026 [inline]
+ vfs_setxattr+0x138/0x3c0 fs/xattr.c:343
+ do_setxattr+0x172/0x1e0 fs/xattr.c:662
+ filename_setxattr+0x156/0x1c0 fs/xattr.c:690
+ path_setxattrat+0x1d1/0x2b0 fs/xattr.c:734
+ __do_sys_lsetxattr fs/xattr.c:775 [inline]
+ __se_sys_lsetxattr fs/xattr.c:771 [inline]
+ __x64_sys_lsetxattr+0xce/0x140 fs/xattr.c:771
+ do_syscall_x64 arch/x86/entry/syscall_64.c:61 [inline]
+ do_syscall_64+0x132/0x7c0 arch/x86/entry/syscall_64.c:89
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
+RIP: 0033:0x7f0b3dbb2b7d
+RSP: 002b:00007f0b3bdd4f98 EFLAGS: 00000246 ORIG_RAX: 00000000000000bd
+RAX: ffffffffffffffda RBX: 00007f0b3de46090 RCX: 00007f0b3dbb2b7d
+RDX: 0000000000000000 RSI: 0000200000000040 RDI: 0000200000000480
+RBP: 00007f0b3dc50273 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007f0b3de46128 R14: 00007f0b3de46090 R15: 00007f0b3bdb5000
+ </TASK>
+
+Showing all locks held in the system:
+locks held by kworker/0:1/11: 2, on CPU#0:
+ #0: ff1100011050f548 ((wq_completion)wg-crypt-wg0#42){+.+.}-{0:0}, at: process_one_work+0x1505/0x1dc0 kernel/workqueue.c:3470
+ #1: ffa000000010fd08 ((work_completion)(&({ do { const void *__vpp_verify = (typeof((worker) + 0))((void *)0); (void)__vpp_verify; } while (0); ({ unsigned long __ptr; __asm__ ("" : "=r"(__ptr) : "0"((__typeof__(*((worker))) *)(( unsigned long)((worker))))); (typeof((__typeof__(*((worker))) *)(( unsigned long)((worker))))) (__ptr + (((__per_cpu_offset[(cpu)])))); }); })->work)){+.+.}-{0:0}, at: process_one_work+0x9f6/0x1dc0 kernel/workqueue.c:3471
+locks held by ksoftirqd/1/24: 1, on CPU#1:
+ #0: ffffffff90225b60 (rcu_callback){....}-{0:0}, at: rcu_lock_acquire include/linux/rcupdate.h:309 [inline]
+ #0: ffffffff90225b60 (rcu_callback){....}-{0:0}, at: rcu_do_batch kernel/rcu/tree.c:2644 [inline]
+ #0: ffffffff90225b60 (rcu_callback){....}-{0:0}, at: rcu_core+0x597/0x1260 kernel/rcu/tree.c:2919
+locks held by kworker/2:0/30: 5, last CPU#2:
+ #0: ff11000101af0d48 ((wq_completion)usb_hub_wq){+.+.}-{0:0}, at: process_one_work+0x1505/0x1dc0 kernel/workqueue.c:3470
+ #1: ffa0000000a7fd08 ((work_completion)(&hub->events)){+.+.}-{0:0}, at: process_one_work+0x9f6/0x1dc0 kernel/workqueue.c:3471
+ #2: ff110000286cd1d8 (&dev->mutex){....}-{4:4}, at: device_lock include/linux/device.h:1109 [inline]
+ #2: ff110000286cd1d8 (&dev->mutex){....}-{4:4}, at: hub_event+0x1b4/0x5010 drivers/usb/core/hub.c:5917
+ #3: ff110000286ca568 (&port_dev->status_lock){+.+.}-{4:4}, at: usb_lock_port drivers/usb/core/hub.c:3270 [inline]
+ #3: ff110000286ca568 (&port_dev->status_lock){+.+.}-{4:4}, at: hub_port_connect drivers/usb/core/hub.c:5482 [inline]
+ #3: ff110000286ca568 (&port_dev->status_lock){+.+.}-{4:4}, at: hub_port_connect_change drivers/usb/core/hub.c:5725 [inline]
+ #3: ff110000286ca568 (&port_dev->status_lock){+.+.}-{4:4}, at: port_event drivers/usb/core/hub.c:5889 [inline]
+ #3: ff110000286ca568 (&port_dev->status_lock){+.+.}-{4:4}, at: hub_event+0x2986/0x5010 drivers/usb/core/hub.c:5971
+ #4: ff11000028640760 (hcd->address0_mutex){+.+.}-{4:4}, at: hub_port_connect drivers/usb/core/hub.c:5483 [inline]
+ #4: ff11000028640760 (hcd->address0_mutex){+.+.}-{4:4}, at: hub_port_connect_change drivers/usb/core/hub.c:5725 [inline]
+ #4: ff11000028640760 (hcd->address0_mutex){+.+.}-{4:4}, at: port_event drivers/usb/core/hub.c:5889 [inline]
+ #4: ff11000028640760 (hcd->address0_mutex){+.+.}-{4:4}, at: hub_event+0x29bb/0x5010 drivers/usb/core/hub.c:5971
+locks held by khungtaskd/48: 1, on CPU#2:
+ #0: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: rcu_lock_acquire include/linux/rcupdate.h:309 [inline]
+ #0: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: rcu_read_lock include/linux/rcupdate.h:849 [inline]
+ #0: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: debug_show_all_locks+0x36/0x1c0 kernel/locking/lockdep.c:6871
+locks held by (udev-worker)/9502: 4, on CPU#3:
+ #0: ffffffff903dabb0 (dup_mmap_sem){++++}-{0:0}, at: dup_mm kernel/fork.c:1536 [inline]
+ #0: ffffffff903dabb0 (dup_mmap_sem){++++}-{0:0}, at: copy_mm kernel/fork.c:1602 [inline]
+ #0: ffffffff903dabb0 (dup_mmap_sem){++++}-{0:0}, at: copy_process+0x7530/0x8710 kernel/fork.c:2328
+ #1: ff110001106fb440 (&mm->mmap_lock){++++}-{4:4}, at: mmap_write_lock_killable include/linux/mmap_lock.h:566 [inline]
+ #1: ff110001106fb440 (&mm->mmap_lock){++++}-{4:4}, at: dup_mm kernel/fork.c:1537 [inline]
+ #1: ff110001106fb440 (&mm->mmap_lock){++++}-{4:4}, at: copy_mm kernel/fork.c:1602 [inline]
+ #1: ff110001106fb440 (&mm->mmap_lock){++++}-{4:4}, at: copy_process+0x7550/0x8710 kernel/fork.c:2328
+ #2: ff11000126ff6540 (&mm->mmap_lock/1){+.+.}-{4:4}, at: mmap_write_lock_nested include/linux/mmap_lock.h:556 [inline]
+ #2: ff11000126ff6540 (&mm->mmap_lock/1){+.+.}-{4:4}, at: dup_mmap+0x177/0x22a0 mm/mmap.c:1722
+ #3: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: rcu_lock_acquire include/linux/rcupdate.h:309 [inline]
+ #3: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: rcu_read_lock include/linux/rcupdate.h:849 [inline]
+ #3: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: __pte_offset_map+0xa4/0x4a0 mm/pgtable-generic.c:302
+locks held by kworker/1:6/11433: 3, on CPU#1:
+ #0: ff1100001de98d48 ((wq_completion)events){+.+.}-{0:0}, at: process_one_work+0x1505/0x1dc0 kernel/workqueue.c:3470
+ #1: ffa0000006587d08 ((work_completion)(&data->fib_event_work)){+.+.}-{0:0}, at: process_one_work+0x9f6/0x1dc0 kernel/workqueue.c:3471
+ #2: ff1100010d8cf258 (&data->fib_lock){+.+.}-{4:4}, at: nsim_fib_event_work+0x1c2/0x6090 drivers/net/netdevsim/fib.c:1490
+locks held by (udev-worker)/12126: 2, on CPU#2:
+ #0: ff1100001f6d0478 (sb_writers){.+.+}-{0:0}, at: filename_create+0xfc/0x410 fs/namei.c:5101
+ #1: ff1100010b4c7650 (&type->i_mutex_dir_key/1){+.+.}-{4:4}, at: inode_lock_nested include/linux/fs.h:1071 [inline]
+ #1: ff1100010b4c7650 (&type->i_mutex_dir_key/1){+.+.}-{4:4}, at: __start_dirop fs/namei.c:2924 [inline]
+ #1: ff1100010b4c7650 (&type->i_mutex_dir_key/1){+.+.}-{4:4}, at: start_dirop fs/namei.c:2948 [inline]
+ #1: ff1100010b4c7650 (&type->i_mutex_dir_key/1){+.+.}-{4:4}, at: filename_create+0x1b6/0x410 fs/namei.c:5108
+locks held by (udev-worker)/13200: 1, on CPU#2:
+ #0: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: rcu_lock_acquire include/linux/rcupdate.h:309 [inline]
+ #0: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: rcu_read_lock include/linux/rcupdate.h:849 [inline]
+ #0: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: sk_filter_trim_cap+0x110/0xe40 net/core/filter.c:161
+locks held by (udev-worker)/13205: 1, on CPU#3:
+ #0: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: rcu_lock_acquire include/linux/rcupdate.h:309 [inline]
+ #0: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: rcu_read_lock include/linux/rcupdate.h:849 [inline]
+ #0: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: class_rcu_constructor include/linux/rcupdate.h:1216 [inline]
+ #0: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: unwind_next_frame+0xbe/0x22c0 arch/x86/kernel/unwind_orc.c:495
+locks held by kworker/u17:2/70103: 1, on CPU#1:
+ #0: ff1100007a684148 ((wq_completion)wg-kex-wg2#81){+.+.}-{0:0}, at: process_one_work+0x1505/0x1dc0 kernel/workqueue.c:3470
+locks held by kworker/1:7/76644: 3, on CPU#1:
+ #0: ff1100001de98d48 ((wq_completion)events){+.+.}-{0:0}, at: process_one_work+0x1505/0x1dc0 kernel/workqueue.c:3470
+ #1: ffa0000005b8fd08 ((work_completion)(&data->fib_event_work)){+.+.}-{0:0}, at: process_one_work+0x9f6/0x1dc0 kernel/workqueue.c:3471
+ #2: ff1100002620c258 (&data->fib_lock){+.+.}-{4:4}, at: nsim_fib_event_work+0x1c2/0x6090 drivers/net/netdevsim/fib.c:1490
+locks held by syz.7.5413/93591: 3, last CPU#1:
+ #0: ff1100010a71c478 (sb_writers#21){++++}-{0:0}, at: filename_setxattr+0xae/0x1c0 fs/xattr.c:688
+ #1: ff1100013e078310 (&inode->i_sb->s_type->i_mutex_dir_key){++++}-{4:4}, at: inode_lock include/linux/fs.h:1026 [inline]
+ #1: ff1100013e078310 (&inode->i_sb->s_type->i_mutex_dir_key){++++}-{4:4}, at: vfs_setxattr+0x138/0x3c0 fs/xattr.c:343
+ #2: ff1100010a71c668 (sb_internal#5){++++}-{0:0}, at: xfs_trans_alloc_inode+0x19d/0x3f0 fs/xfs/xfs_trans.c:1088
+locks held by syz.7.5413/93781: 2, last CPU#1:
+ #0: ff1100010a71c478 (sb_writers#21){++++}-{0:0}, at: filename_setxattr+0xae/0x1c0 fs/xattr.c:688
+ #1: ff1100013e078310 (&inode->i_sb->s_type->i_mutex_dir_key){++++}-{4:4}, at: inode_lock include/linux/fs.h:1026 [inline]
+ #1: ff1100013e078310 (&inode->i_sb->s_type->i_mutex_dir_key){++++}-{4:4}, at: vfs_setxattr+0x138/0x3c0 fs/xattr.c:343
+locks held by syz-executor/104182: 7, on CPU#1:
+ #0: ff1100002e144478 (sb_writers#5){.+.+}-{0:0}, at: ksys_write+0x126/0x240 fs/read_write.c:739
+ #1: ff1100002bce8080 (&of->mutex#2){+.+.}-{4:4}, at: kernfs_fop_write_iter+0x288/0x580 fs/kernfs/file.c:336
+ #2: ff11000109e68d28 (kn->active#104){.+.+}-{0:0}, at: kernfs_get_active_of fs/kernfs/file.c:73 [inline]
+ #2: ff11000109e68d28 (kn->active#104){.+.+}-{0:0}, at: kernfs_fop_write_iter+0x2f5/0x580 fs/kernfs/file.c:337
+ #3: ffffffff91946de0 (nsim_bus_dev_list_lock){+.+.}-{4:4}, at: new_device_store+0x177/0x700 drivers/net/netdevsim/bus.c:184
+ #4: ff1100002e339128 (&dev->mutex){....}-{4:4}, at: device_lock include/linux/device.h:1109 [inline]
+ #4: ff1100002e339128 (&dev->mutex){....}-{4:4}, at: __device_attach+0x82/0x4e0 drivers/base/dd.c:1106
+ #5: ff1100007e55a258 (&devlink->lock_key#55){+.+.}-{4:4}, at: nsim_drv_probe+0xd0/0x13f0 drivers/net/netdevsim/dev.c:1582
+ #6: ffffffff9237e460 (rtnl_mutex){+.+.}-{4:4}, at: rtnl_net_lock include/linux/rtnetlink.h:134 [inline]
+ #6: ffffffff9237e460 (rtnl_mutex){+.+.}-{4:4}, at: register_netdevice_notifier_net+0x28/0xb0 net/core/dev.c:2166
+locks held by syz.9.6209/105208: 3, on CPU#2:
+ #0: ff11000147935eb0 (&f->f_pos_lock){+.+.}-{4:4}, at: fdget_pos+0x2a5/0x380 fs/file.c:1409
+ #1: ff1100001f6bc478 (sb_writers#7){.+.+}-{0:0}, at: ksys_write+0x126/0x240 fs/read_write.c:739
+ #2: ff11000138cc3348 (&sb->s_type->i_mutex_key#18){++++}-{4:4}, at: inode_lock include/linux/fs.h:1026 [inline]
+ #2: ff11000138cc3348 (&sb->s_type->i_mutex_key#18){++++}-{4:4}, at: shmem_file_write_iter+0x8d/0x140 mm/shmem.c:3679
+locks held by syz.5.6211/105215: 1, on CPU#1:
+ #0: ffffffff902322e8 (rcu_state.exp_mutex){+.+.}-{4:4}, at: exp_funnel_lock+0x1a8/0x3b0 kernel/rcu/tree_exp.h:343
+locks held by logger/105247: 2, on CPU#3:
+ #0: ff1100007cf26540 (&mm->mmap_lock){++++}-{4:4}, at: mmap_read_lock include/linux/mmap_lock.h:616 [inline]
+ #0: ff1100007cf26540 (&mm->mmap_lock){++++}-{4:4}, at: exit_mmap+0x107/0xa50 mm/mmap.c:1299
+ #1: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: rcu_lock_acquire include/linux/rcupdate.h:309 [inline]
+ #1: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: rcu_read_lock include/linux/rcupdate.h:849 [inline]
+ #1: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: __pte_offset_map+0xa4/0x4a0 mm/pgtable-generic.c:302
+locks held by probe-bcache/105248: 1, on CPU#0:
+ #0: ff1100005f0c6140 (&tsk->futex.exit_mutex){+.+.}-{4:4}, at: futex_cleanup_begin kernel/futex/core.c:1521 [inline]
+ #0: ff1100005f0c6140 (&tsk->futex.exit_mutex){+.+.}-{4:4}, at: futex_exit_exec_release+0xa5/0xf10 kernel/futex/core.c:1570
+locks held by syz.6.6214/105252: 7, on CPU#2:
+ #0: ff11000128132478 (sb_writers#14){.+.+}-{0:0}, at: do_pwritev+0x127/0x300 fs/read_write.c:1153
+ #1: ff110001379769a0 (&sb->s_type->i_mutex_key#35){++++}-{4:4}, at: inode_lock include/linux/fs.h:1026 [inline]
+ #1: ff110001379769a0 (&sb->s_type->i_mutex_key#35){++++}-{4:4}, at: generic_file_write_iter+0x91/0x390 mm/filemap.c:4532
+ #2: ff11000128132668 (sb_internal#3){.+.+}-{0:0}, at: nilfs_write_begin+0x78/0x1b0 fs/nilfs2/inode.c:228
+ #3: ff11000112fac288 (&nilfs->ns_segctor_sem){++++}-{4:4}, at: nilfs_transaction_begin+0x323/0xa00 fs/nilfs2/segment.c:221
+ #4: ff110001379767c8 (&bmap->b_sem){++++}-{4:4}, at: nilfs_bmap_insert+0x9c/0x400 fs/nilfs2/bmap.c:148
+ #5: ff11000137976dd8 (&nilfs_bmap_dat_lock_key){++++}-{4:4}, at: nilfs_bmap_insert+0x9c/0x400 fs/nilfs2/bmap.c:148
+ #6: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: rcu_lock_acquire include/linux/rcupdate.h:309 [inline]
+ #6: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: rcu_read_lock include/linux/rcupdate.h:849 [inline]
+ #6: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: filemap_get_entry+0xca/0x430 mm/filemap.c:1933
+locks held by syz.6.6214/105261: 4, on CPU#0:
+ #0: ff110001113d4470 (&f->f_pos_lock){+.+.}-{4:4}, at: fdget_pos+0x2a5/0x380 fs/file.c:1409
+ #1: ff1100001f6bc478 (sb_writers#7){.+.+}-{0:0}, at: ksys_write+0x126/0x240 fs/read_write.c:739
+ #2: ff1100010da85df0 (&sb->s_type->i_mutex_key#18){++++}-{4:4}, at: inode_lock include/linux/fs.h:1026 [inline]
+ #2: ff1100010da85df0 (&sb->s_type->i_mutex_key#18){++++}-{4:4}, at: shmem_file_write_iter+0x8d/0x140 mm/shmem.c:3679
+ #3: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: local_lock_acquire include/linux/local_lock_internal.h:46 [inline]
+ #3: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: __folio_batch_add_and_move+0x6d3/0xc20 mm/folio.c:221
+locks held by probe-bcache/105256: 3, on CPU#2:
+ #0: ff11000106cfe3e8 (&sb->s_type->i_mutex_key#11){++++}-{4:4}, at: inode_lock_shared include/linux/fs.h:1041 [inline]
+ #0: ff11000106cfe3e8 (&sb->s_type->i_mutex_key#11){++++}-{4:4}, at: blkdev_read_iter+0x417/0x680 block/fops.c:894
+ #1: ff11000106cfe580 (mapping.invalidate_lock){++++}-{4:4}, at: filemap_invalidate_lock_shared include/linux/fs.h:1091 [inline]
+ #1: ff11000106cfe580 (mapping.invalidate_lock){++++}-{4:4}, at: do_page_cache_ra mm/readahead.c:347 [inline]
+ #1: ff11000106cfe580 (mapping.invalidate_lock){++++}-{4:4}, at: force_page_cache_ra+0x285/0x3b0 mm/readahead.c:378
+ #2: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: rcu_lock_acquire include/linux/rcupdate.h:309 [inline]
+ #2: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: rcu_read_lock include/linux/rcupdate.h:849 [inline]
+ #2: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: blk_mq_dispatch_queue_requests+0x474/0x7b0 block/blk-mq.c:2901
+locks held by probe-bcache/105264: 1, on CPU#1:
+ #0: ff11000147e7b440 (&mm->mmap_lock){++++}-{4:4}, at: mmap_write_lock include/linux/mmap_lock.h:548 [inline]
+ #0: ff11000147e7b440 (&mm->mmap_lock){++++}-{4:4}, at: exit_mmap+0x224/0xa50 mm/mmap.c:1323
+locks held by probe-bcache/105266: 1, on CPU#1:
+ #0: ff11000147e7e540 (&mm->mmap_lock){++++}-{4:4}, at: mmap_write_lock include/linux/mmap_lock.h:548 [inline]
+ #0: ff11000147e7e540 (&mm->mmap_lock){++++}-{4:4}, at: exit_mmap+0x224/0xa50 mm/mmap.c:1323
+locks held by syz.1.6217/105268: 1, last CPU#1:
+ #0: ffffffff9237e460 (rtnl_mutex){+.+.}-{4:4}, at: rtnl_lock net/core/rtnetlink.c:80 [inline]
+ #0: ffffffff9237e460 (rtnl_mutex){+.+.}-{4:4}, at: rtnetlink_rcv_msg+0x37c/0xfa0 net/core/rtnetlink.c:7175
+
+=============================================
+
+NMI backtrace for cpu 2
+CPU: 2 UID: 0 PID: 48 Comm: khungtaskd Tainted: G             L      7.4.0-rc2-kernsight-kasan #1 PREEMPT(full) 
+Tainted: [L]=SOFTLOCKUP
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:94 [inline]
+ dump_stack_lvl+0x116/0x1b0 lib/dump_stack.c:120
+ nmi_cpu_backtrace+0x2a0/0x350 lib/nmi_backtrace.c:123
+ nmi_trigger_cpumask_backtrace+0x286/0x370 lib/nmi_backtrace.c:66
+ trigger_all_cpu_backtrace include/linux/nmi.h:164 [inline]
+ __sys_info lib/sys_info.c:157 [inline]
+ sys_info+0x133/0x180 lib/sys_info.c:165
+ check_hung_uninterruptible_tasks kernel/hung_task.c:377 [inline]
+ watchdog+0xf12/0x1300 kernel/hung_task.c:598
+ kthread+0x395/0x4a0 kernel/kthread.c:436
+ ret_from_fork+0xb11/0xdb0 arch/x86/kernel/process.c:158
+ ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:245
+ </TASK>
+Sending NMI from CPU 2 to CPUs 0-1,3:
+NMI backtrace for cpu 0
+CPU: 0 UID: 0 PID: 105261 Comm: syz.6.6214 Tainted: G             L      7.4.0-rc2-kernsight-kasan #1 PREEMPT(full) 
+Tainted: [L]=SOFTLOCKUP
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:__raw_spin_lock_irq include/linux/spinlock_api_smp.h:163 [inline]
+RIP: 0010:_raw_spin_lock_irq+0x4a/0x50 kernel/locking/spinlock.c:189
+Code: 74 24 08 48 8d 7d 18 45 31 c9 31 c9 41 b8 01 00 00 00 31 d2 31 f6 e8 15 39 b5 f5 48 89 ef 58 5d e9 1b 8c b5 f5 e8 86 58 eb f5 <eb> c9 0f 1f 40 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90
+RSP: 0018:ffa00000081ef7b8 EFLAGS: 00000002
+RAX: 0000000000000001 RBX: 0000000000000cc0 RCX: ffffffff81d774a1
+RDX: 0000000000000000 RSI: 0000000000000001 RDI: ffffffff8eb1ba00
+RBP: ff1100010da85ed0 R08: 0000000000000000 R09: fffffbfff256413c
+R10: ffffffff92b209e7 R11: 0000000000000000 R12: ffa00000081ef838
+R13: 0000000000000001 R14: ffd400000164e500 R15: 0000000000000000
+FS:  00007fdb66fd5640(0000) GS:ff1100010b21e000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 000055fed4ee0d68 CR3: 000000005c236000 CR4: 0000000000753ef0
+PKRU: 80000000
+Call Trace:
+ <TASK>
+ spin_lock_irq include/linux/spinlock.h:377 [inline]
+ shmem_add_to_page_cache+0x62d/0xb20 mm/shmem.c:1129
+ shmem_alloc_and_add_folio+0x57b/0xbd0 mm/shmem.c:2252
+ shmem_get_folio_gfp+0x5c9/0x1850 mm/shmem.c:2780
+ shmem_get_folio mm/shmem.c:2879 [inline]
+ shmem_write_begin+0x19b/0x570 mm/shmem.c:3514
+ generic_perform_write+0x3e8/0x900 mm/filemap.c:4392
+ shmem_file_write_iter+0x116/0x140 mm/shmem.c:3689
+ new_sync_write fs/read_write.c:595 [inline]
+ vfs_write+0xc16/0x1140 fs/read_write.c:687
+ ksys_write+0x126/0x240 fs/read_write.c:739
+ do_syscall_x64 arch/x86/entry/syscall_64.c:61 [inline]
+ do_syscall_64+0x132/0x7c0 arch/x86/entry/syscall_64.c:89
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
+RIP: 0033:0x7fdb68db15bf
+Code: 89 54 24 18 48 89 74 24 10 89 7c 24 08 e8 d9 0c 03 00 48 8b 54 24 18 48 8b 74 24 10 41 89 c0 8b 7c 24 08 b8 01 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 31 44 89 c7 48 89 44 24 08 e8 1c 0d 03 00 48
+RSP: 002b:00007fdb66fd4d30 EFLAGS: 00000293 ORIG_RAX: 0000000000000001
+RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007fdb68db15bf
+RDX: 0000000001000000 RSI: 00007fdb5ea00000 RDI: 0000000000000007
+RBP: 000000000000559a R08: 0000000000000000 R09: 0000000000005596
+R10: 0000000000000002 R11: 0000000000000293 R12: 0000000000000007
+R13: 00007fdb66fd4dfc R14: 00007fdb66fd4e00 R15: 00007fdb5ea00000
+ </TASK>
+NMI backtrace for cpu 1
+CPU: 1 UID: 0 PID: 99498 Comm: kworker/u17:11 Tainted: G             L      7.4.0-rc2-kernsight-kasan #1 PREEMPT(full) 
+Tainted: [L]=SOFTLOCKUP
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Workqueue: wg-kex-wg2 wg_packet_handshake_send_worker
+RIP: 0010:__bfs_next kernel/locking/lockdep.c:1743 [inline]
+RIP: 0010:__bfs+0x62/0x2b0 kernel/locking/lockdep.c:1796
+Code: 85 d3 01 00 00 48 b8 00 00 00 00 01 00 00 00 83 05 b2 3a 3f 17 01 45 31 ff 49 63 e9 48 89 1d c5 3a 3f 17 48 89 05 be ba 3f 17 <4d> 85 ff 0f 84 20 01 00 00 49 8b 47 30 48 85 c0 0f 84 13 01 00 00
+RSP: 0018:ffa00000079ff520 EFLAGS: 00000046
+RAX: ffffffff982f9808 RBX: 000000000000037a RCX: 0000000000100c2a
+RDX: ffffffff99c90cb8 RSI: ffa00000079ff5b0 RDI: ffffffff98279bb0
+RBP: 0000000000000030 R08: ffffffff9830a750 R09: 0000000000000378
+R10: ffa00000079ff6b0 R11: 0000000000000000 R12: ffffffff81a0ba80
+R13: ffa00000079ff5b0 R14: ffffffff81a0bb40 R15: ffffffff99c90cb8
+FS:  0000000000000000(0000) GS:ff1100010b31e000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007efd2fd77f00 CR3: 0000000102b3b000 CR4: 0000000000753ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ __bfs_backwards kernel/locking/lockdep.c:1904 [inline]
+ check_irq_usage+0xb5/0xc80 kernel/locking/lockdep.c:2840
+ check_prev_add+0xfd/0xe60 kernel/locking/lockdep.c:3213
+ check_prevs_add kernel/locking/lockdep.c:3328 [inline]
+ validate_chain kernel/locking/lockdep.c:3952 [inline]
+ __lock_acquire+0x1661/0x2110 kernel/locking/lockdep.c:5288
+ lock_acquire kernel/locking/lockdep.c:5942 [inline]
+ lock_acquire+0x1bf/0x370 kernel/locking/lockdep.c:5899
+ __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:155 [inline]
+ _raw_spin_lock_irqsave+0x42/0x60 kernel/locking/spinlock.c:181
+ debug_object_activate+0x146/0x4b0 lib/debugobjects.c:873
+ debug_timer_activate kernel/time/timer.c:794 [inline]
+ __mod_timer+0x7f0/0xd10 kernel/time/timer.c:1125
+ mod_peer_timer+0x13f/0x2c0 drivers/net/wireguard/timers.c:37
+ wg_timers_any_authenticated_packet_traversal+0x9a/0xc0 drivers/net/wireguard/timers.c:218
+ wg_packet_send_handshake_initiation+0x1b9/0x350 drivers/net/wireguard/send.c:36
+ wg_packet_handshake_send_worker+0x21/0x30 drivers/net/wireguard/send.c:51
+ process_one_work+0xa9c/0x1dc0 kernel/workqueue.c:3495
+ process_scheduled_works kernel/workqueue.c:3578 [inline]
+ worker_thread+0x698/0xeb0 kernel/workqueue.c:3659
+ kthread+0x395/0x4a0 kernel/kthread.c:436
+ ret_from_fork+0xb11/0xdb0 arch/x86/kernel/process.c:158
+ ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:245
+ </TASK>
+NMI backtrace for cpu 3
+CPU: 3 UID: 0 PID: 47 Comm: pr/ttyS0 Tainted: G             L      7.4.0-rc2-kernsight-kasan #1 PREEMPT(full) 
+Tainted: [L]=SOFTLOCKUP
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:io_serial_out+0x94/0xb0 drivers/tty/serial/8250/8250_port.c:432
+Code: 48 8d 7d 40 44 89 e1 48 b8 00 00 00 00 00 fc ff df 48 89 fa d3 e3 48 c1 ea 03 80 3c 02 00 75 1c 66 03 5d 40 44 89 e8 89 da ee <5b> 5d 41 5c 41 5d e9 91 c3 31 06 e8 2c 4a 97 fc eb a0 e8 b5 4a 97
+RSP: 0018:ffa0000000bbf9f0 EFLAGS: 00000002
+RAX: 000000000000002e RBX: 00000000000003f8 RCX: 0000000000000000
+RDX: 00000000000003f8 RSI: ffffffff85baaada RDI: ffffffff9d5d22c0
+RBP: ffffffff9d5d2280 R08: ffffffff85baaacb R09: 0000000000000000
+R10: 0000000000000003 R11: 6174203a4f464e49 R12: 0000000000000000
+R13: 000000000000002e R14: ffa0000000bbfdb0 R15: 0000000000000001
+FS:  0000000000000000(0000) GS:ff1100020dd1e000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f92b64a1000 CR3: 000000010c4c2000 CR4: 0000000000753ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff0ff0 DR7: 0000000000000600
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ serial_port_out include/linux/serial_core.h:817 [inline]
+ serial8250_console_putchar drivers/tty/serial/8250/8250_port.c:3311 [inline]
+ __serial8250_console_fifo_write+0xef/0x2b0 drivers/tty/serial/8250/8250_port.c:3383
+ serial8250_console_fifo_write drivers/tty/serial/8250/8250_port.c:3402 [inline]
+ __serial8250_console_write drivers/tty/serial/8250/8250_port.c:3456 [inline]
+ serial8250_console_write+0xf36/0x1380 drivers/tty/serial/8250/8250_port.c:3520
+ nbcon_emit_next_record+0x679/0xa40 kernel/printk/nbcon.c:1070
+ nbcon_emit_one+0x1af/0x2c0 kernel/printk/nbcon.c:1157
+ nbcon_kthread_func+0x646/0x860 kernel/printk/nbcon.c:1271
+ kthread+0x395/0x4a0 kernel/kthread.c:436
+ ret_from_fork+0xb11/0xdb0 arch/x86/kernel/process.c:158
+ ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:245
+ </TASK>
+
+<<<<<<<<<<<<<<< tail report >>>>>>>>>>>>>>>
+
+      Tainted: G             L      7.4.0-rc2-kernsight-kasan #1
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:syz.7.5413      state:D stack:26008 pid:93591 tgid:93589 ppid:51167  task_flags:0x440140 flags:0x00080003
+Call Trace:
+ <TASK>
+ __schedule+0x1425/0x6840
+ schedule+0xec/0x2d0
+ xlog_grant_head_wait+0x144/0xd00
+ xlog_grant_head_check+0x57f/0x610
+ xfs_log_reserve+0x303/0x8b0
+ xfs_trans_alloc+0x489/0xea0
+ xfs_trans_alloc_inode+0x19d/0x3f0
+ xfs_attr_set+0x9d7/0x11f0
+ xfs_attr_change+0x37e/0x500
+ xfs_xattr_set+0x16f/0x250
+ __vfs_setxattr+0x17a/0x1e0
+ __vfs_setxattr_noperm+0x12e/0x670
+ __vfs_setxattr_locked+0x12c/0x300
+ vfs_setxattr+0x160/0x3c0
+ do_setxattr+0x172/0x1e0
+ filename_setxattr+0x156/0x1c0
+ path_setxattrat+0x1d1/0x2b0
+ __x64_sys_setxattr+0xcb/0x140
+ do_syscall_64+0x132/0x7c0
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
+RIP: 0033:0x7f0b3dbb2b7d
+RSP: 002b:00007f0b3bdf5f98 EFLAGS: 00000246 ORIG_RAX: 00000000000000bc
+RAX: ffffffffffffffda RBX: 00007f0b3de45fa0 RCX: 00007f0b3dbb2b7d
+RDX: 0000200000000800 RSI: 00002000000007c0 RDI: 0000200000000780
+RBP: 00007f0b3dc50273 R08: 0000000000000001 R09: 0000000000000000
+R10: 000000000000fffe R11: 0000000000000246 R12: 0000000000000000
+R13: 00007f0b3de46038 R14: 00007f0b3de45fa0 R15: 00007f0b3bdd6000
+ </TASK>
+INFO: task syz.7.5413:93781 blocked for more than 143 seconds.
+      Tainted: G             L      7.4.0-rc2-kernsight-kasan #1
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:syz.7.5413      state:D stack:28664 pid:93781 tgid:93589 ppid:51167  task_flags:0x400040 flags:0x00080002
+Call Trace:
+ <TASK>
+ __schedule+0x1425/0x6840
+ schedule+0xec/0x2d0
+ schedule_preempt_disabled+0x18/0x30
+ rwsem_down_write_slowpath+0x3a9/0x12e0
+ down_write+0x1d5/0x200
+ vfs_setxattr+0x138/0x3c0
+ do_setxattr+0x172/0x1e0
+ filename_setxattr+0x156/0x1c0
+ path_setxattrat+0x1d1/0x2b0
+ __x64_sys_lsetxattr+0xce/0x140
+ do_syscall_64+0x132/0x7c0
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
+RIP: 0033:0x7f0b3dbb2b7d
+RSP: 002b:00007f0b3bdd4f98 EFLAGS: 00000246 ORIG_RAX: 00000000000000bd
+RAX: ffffffffffffffda RBX: 00007f0b3de46090 RCX: 00007f0b3dbb2b7d
+RDX: 0000000000000000 RSI: 0000200000000040 RDI: 0000200000000480
+RBP: 00007f0b3dc50273 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007f0b3de46128 R14: 00007f0b3de46090 R15: 00007f0b3bdb5000
+ </TASK>
+
+Showing all locks held in the system:
+locks held by kworker/0:1/11: 2, on CPU#0:
+ #0: ff1100011050f548 ((wq_completion)wg-crypt-wg0#42){+.+.}-{0:0}, at: process_one_work+0x1505/0x1dc0
+ #1: ffa000000010fd08 ((work_completion)(&({ do { const void *__vpp_verify = (typeof((worker) + 0))((void *)0); (void)__vpp_verify; } while (0); ({ unsigned long __ptr; __asm__ ("" : "=r"(__ptr) : "0"((__typeof__(*((worker))) *)(( unsigned long)((worker))))); (typeof((__typeof__(*((worker))) *)(( unsigned long)((worker))))) (__ptr + (((__per_cpu_offset[(cpu)])))); }); })->work)){+.+.}-{0:0}, at: process_one_work+0x9f6/0x1dc0
+locks held by ksoftirqd/1/24: 1, on CPU#1:
+ #0: ffffffff90225b60 (rcu_callback){....}-{0:0}, at: rcu_core+0x597/0x1260
+locks held by kworker/2:0/30: 5, last CPU#2:
+ #0: ff11000101af0d48 ((wq_completion)usb_hub_wq){+.+.}-{0:0}, at: process_one_work+0x1505/0x1dc0
+ #1: ffa0000000a7fd08 ((work_completion)(&hub->events)){+.+.}-{0:0}, at: process_one_work+0x9f6/0x1dc0
+ #2: ff110000286cd1d8 (&dev->mutex){....}-{4:4}, at: hub_event+0x1b4/0x5010
+ #3: ff110000286ca568 (&port_dev->status_lock){+.+.}-{4:4}, at: hub_event+0x2986/0x5010
+ #4: ff11000028640760 (hcd->address0_mutex){+.+.}-{4:4}, at: hub_event+0x29bb/0x5010
+locks held by khungtaskd/48: 1, on CPU#2:
+ #0: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: debug_show_all_locks+0x36/0x1c0
+locks held by (udev-worker)/9502: 4, on CPU#3:
+ #0: ffffffff903dabb0 (dup_mmap_sem){++++}-{0:0}, at: copy_process+0x7530/0x8710
+ #1: ff110001106fb440 (&mm->mmap_lock){++++}-{4:4}, at: copy_process+0x7550/0x8710
+ #2: ff11000126ff6540 (&mm->mmap_lock/1){+.+.}-{4:4}, at: dup_mmap+0x177/0x22a0
+ #3: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: __pte_offset_map+0xa4/0x4a0
+locks held by kworker/1:6/11433: 3, on CPU#1:
+ #0: ff1100001de98d48 ((wq_completion)events){+.+.}-{0:0}, at: process_one_work+0x1505/0x1dc0
+ #1: ffa0000006587d08 ((work_completion)(&data->fib_event_work)){+.+.}-{0:0}, at: process_one_work+0x9f6/0x1dc0
+ #2: ff1100010d8cf258 (&data->fib_lock){+.+.}-{4:4}, at: nsim_fib_event_work+0x1c2/0x6090
+locks held by (udev-worker)/12126: 2, on CPU#2:
+ #0: ff1100001f6d0478 (sb_writers){.+.+}-{0:0}, at: filename_create+0xfc/0x410
+ #1: ff1100010b4c7650 (&type->i_mutex_dir_key/1){+.+.}-{4:4}, at: filename_create+0x1b6/0x410
+locks held by (udev-worker)/13200: 1, on CPU#2:
+ #0: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: sk_filter_trim_cap+0x110/0xe40
+locks held by (udev-worker)/13205: 1, on CPU#3:
+ #0: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: unwind_next_frame+0xbe/0x22c0
+locks held by kworker/u17:2/70103: 1, on CPU#1:
+ #0: ff1100007a684148 ((wq_completion)wg-kex-wg2#81){+.+.}-{0:0}, at: process_one_work+0x1505/0x1dc0
+locks held by kworker/1:7/76644: 3, on CPU#1:
+ #0: ff1100001de98d48 ((wq_completion)events){+.+.}-{0:0}, at: process_one_work+0x1505/0x1dc0
+ #1: ffa0000005b8fd08 ((work_completion)(&data->fib_event_work)){+.+.}-{0:0}, at: process_one_work+0x9f6/0x1dc0
+ #2: ff1100002620c258 (&data->fib_lock){+.+.}-{4:4}, at: nsim_fib_event_work+0x1c2/0x6090
+locks held by syz.7.5413/93591: 3, last CPU#1:
+ #0: ff1100010a71c478 (sb_writers#21){++++}-{0:0}, at: filename_setxattr+0xae/0x1c0
+ #1: ff1100013e078310 (&inode->i_sb->s_type->i_mutex_dir_key){++++}-{4:4}, at: vfs_setxattr+0x138/0x3c0
+ #2: ff1100010a71c668 (sb_internal#5){++++}-{0:0}, at: xfs_trans_alloc_inode+0x19d/0x3f0
+locks held by syz.7.5413/93781: 2, last CPU#1:
+ #0: ff1100010a71c478 (sb_writers#21){++++}-{0:0}, at: filename_setxattr+0xae/0x1c0
+ #1: ff1100013e078310 (&inode->i_sb->s_type->i_mutex_dir_key){++++}-{4:4}, at: vfs_setxattr+0x138/0x3c0
+locks held by syz-executor/104182: 7, on CPU#1:
+ #0: ff1100002e144478 (sb_writers#5){.+.+}-{0:0}, at: ksys_write+0x126/0x240
+ #1: ff1100002bce8080 (&of->mutex#2){+.+.}-{4:4}, at: kernfs_fop_write_iter+0x288/0x580
+ #2: ff11000109e68d28 (kn->active#104){.+.+}-{0:0}, at: kernfs_fop_write_iter+0x2f5/0x580
+ #3: ffffffff91946de0 (nsim_bus_dev_list_lock){+.+.}-{4:4}, at: new_device_store+0x177/0x700
+ #4: ff1100002e339128 (&dev->mutex){....}-{4:4}, at: __device_attach+0x82/0x4e0
+ #5: ff1100007e55a258 (&devlink->lock_key#55){+.+.}-{4:4}, at: nsim_drv_probe+0xd0/0x13f0
+ #6: ffffffff9237e460 (rtnl_mutex){+.+.}-{4:4}, at: register_netdevice_notifier_net+0x28/0xb0
+locks held by syz.9.6209/105208: 3, on CPU#2:
+ #0: ff11000147935eb0 (&f->f_pos_lock){+.+.}-{4:4}, at: fdget_pos+0x2a5/0x380
+ #1: ff1100001f6bc478 (sb_writers#7){.+.+}-{0:0}, at: ksys_write+0x126/0x240
+ #2: ff11000138cc3348 (&sb->s_type->i_mutex_key#18){++++}-{4:4}, at: shmem_file_write_iter+0x8d/0x140
+locks held by syz.5.6211/105215: 1, on CPU#1:
+ #0: ffffffff902322e8 (rcu_state.exp_mutex){+.+.}-{4:4}, at: exp_funnel_lock+0x1a8/0x3b0
+locks held by logger/105247: 2, on CPU#3:
+ #0: ff1100007cf26540 (&mm->mmap_lock){++++}-{4:4}, at: exit_mmap+0x107/0xa50
+ #1: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: __pte_offset_map+0xa4/0x4a0
+locks held by probe-bcache/105248: 1, on CPU#0:
+ #0: ff1100005f0c6140 (&tsk->futex.exit_mutex){+.+.}-{4:4}, at: futex_exit_exec_release+0xa5/0xf10
+locks held by syz.6.6214/105252: 7, on CPU#2:
+ #0: ff11000128132478 (sb_writers#14){.+.+}-{0:0}, at: do_pwritev+0x127/0x300
+ #1: ff110001379769a0 (&sb->s_type->i_mutex_key#35){++++}-{4:4}, at: generic_file_write_iter+0x91/0x390
+ #2: ff11000128132668 (sb_internal#3){.+.+}-{0:0}, at: nilfs_write_begin+0x78/0x1b0
+ #3: ff11000112fac288 (&nilfs->ns_segctor_sem){++++}-{4:4}, at: nilfs_transaction_begin+0x323/0xa00
+ #4: ff110001379767c8 (&bmap->b_sem){++++}-{4:4}, at: nilfs_bmap_insert+0x9c/0x400
+ #5: ff11000137976dd8 (&nilfs_bmap_dat_lock_key){++++}-{4:4}, at: nilfs_bmap_insert+0x9c/0x400
+ #6: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: filemap_get_entry+0xca/0x430
+locks held by syz.6.6214/105261: 4, on CPU#0:
+ #0: ff110001113d4470 (&f->f_pos_lock){+.+.}-{4:4}, at: fdget_pos+0x2a5/0x380
+ #1: ff1100001f6bc478 (sb_writers#7){.+.+}-{0:0}, at: ksys_write+0x126/0x240
+ #2: ff1100010da85df0 (&sb->s_type->i_mutex_key#18){++++}-{4:4}, at: shmem_file_write_iter+0x8d/0x140
+ #3: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: __folio_batch_add_and_move+0x6d3/0xc20
+locks held by probe-bcache/105256: 3, on CPU#2:
+ #0: ff11000106cfe3e8 (&sb->s_type->i_mutex_key#11){++++}-{4:4}, at: blkdev_read_iter+0x417/0x680
+ #1: ff11000106cfe580 (mapping.invalidate_lock){++++}-{4:4}, at: force_page_cache_ra+0x285/0x3b0
+ #2: ffffffff90225c80 (rcu_read_lock){....}-{1:3}, at: blk_mq_dispatch_queue_requests+0x474/0x7b0
+locks held by probe-bcache/105264: 1, on CPU#1:
+ #0: ff11000147e7b440 (&mm->mmap_lock){++++}-{4:4}, at: exit_mmap+0x224/0xa50
+locks held by probe-bcache/105266: 1, on CPU#1:
+ #0: ff11000147e7e540 (&mm->mmap_lock){++++}-{4:4}, at: exit_mmap+0x224/0xa50
+locks held by syz.1.6217/105268: 1, last CPU#1:
+ #0: ffffffff9237e460 (rtnl_mutex){+.+.}-{4:4}, at: rtnetlink_rcv_msg+0x37c/0xfa0
+
+=============================================
+
+NMI backtrace for cpu 2
+CPU: 2 UID: 0 PID: 48 Comm: khungtaskd Tainted: G             L      7.4.0-rc2-kernsight-kasan #1 PREEMPT(full) 
+Tainted: [L]=SOFTLOCKUP
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Call Trace:
+ <TASK>
+ dump_stack_lvl+0x116/0x1b0
+ nmi_cpu_backtrace+0x2a0/0x350
+ nmi_trigger_cpumask_backtrace+0x286/0x370
+ sys_info+0x133/0x180
+ watchdog+0xf12/0x1300
+ kthread+0x395/0x4a0
+ ret_from_fork+0xb11/0xdb0
+ ret_from_fork_asm+0x1a/0x30
+ </TASK>
+Sending NMI from CPU 2 to CPUs 0-1,3:
+NMI backtrace for cpu 0
+CPU: 0 UID: 0 PID: 105261 Comm: syz.6.6214 Tainted: G             L      7.4.0-rc2-kernsight-kasan #1 PREEMPT(full) 
+Tainted: [L]=SOFTLOCKUP
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:_raw_spin_lock_irq+0x4a/0x50
+Code: 74 24 08 48 8d 7d 18 45 31 c9 31 c9 41 b8 01 00 00 00 31 d2 31 f6 e8 15 39 b5 f5 48 89 ef 58 5d e9 1b 8c b5 f5 e8 86 58 eb f5 <eb> c9 0f 1f 40 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90
+RSP: 0018:ffa00000081ef7b8 EFLAGS: 00000002
+RAX: 0000000000000001 RBX: 0000000000000cc0 RCX: ffffffff81d774a1
+RDX: 0000000000000000 RSI: 0000000000000001 RDI: ffffffff8eb1ba00
+RBP: ff1100010da85ed0 R08: 0000000000000000 R09: fffffbfff256413c
+R10: ffffffff92b209e7 R11: 0000000000000000 R12: ffa00000081ef838
+R13: 0000000000000001 R14: ffd400000164e500 R15: 0000000000000000
+FS:  00007fdb66fd5640(0000) GS:ff1100010b21e000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 000055fed4ee0d68 CR3: 000000005c236000 CR4: 0000000000753ef0
+PKRU: 80000000
+Call Trace:
+ <TASK>
+ shmem_add_to_page_cache+0x62d/0xb20
+ shmem_alloc_and_add_folio+0x57b/0xbd0
+ shmem_get_folio_gfp+0x5c9/0x1850
+ shmem_write_begin+0x19b/0x570
+ generic_perform_write+0x3e8/0x900
+ shmem_file_write_iter+0x116/0x140
+ vfs_write+0xc16/0x1140
+ ksys_write+0x126/0x240
+ do_syscall_64+0x132/0x7c0
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
+RIP: 0033:0x7fdb68db15bf
+Code: 89 54 24 18 48 89 74 24 10 89 7c 24 08 e8 d9 0c 03 00 48 8b 54 24 18 48 8b 74 24 10 41 89 c0 8b 7c 24 08 b8 01 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 31 44 89 c7 48 89 44 24 08 e8 1c 0d 03 00 48
+RSP: 002b:00007fdb66fd4d30 EFLAGS: 00000293 ORIG_RAX: 0000000000000001
+RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007fdb68db15bf
+RDX: 0000000001000000 RSI: 00007fdb5ea00000 RDI: 0000000000000007
+RBP: 000000000000559a R08: 0000000000000000 R09: 0000000000005596
+R10: 0000000000000002 R11: 0000000000000293 R12: 0000000000000007
+R13: 00007fdb66fd4dfc R14: 00007fdb66fd4e00 R15: 00007fdb5ea00000
+ </TASK>
+NMI backtrace for cpu 1
+CPU: 1 UID: 0 PID: 99498 Comm: kworker/u17:11 Tainted: G             L      7.4.0-rc2-kernsight-kasan #1 PREEMPT(full) 
+Tainted: [L]=SOFTLOCKUP
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+Workqueue: wg-kex-wg2 wg_packet_handshake_send_worker
+RIP: 0010:__bfs+0x62/0x2b0
+Code: 85 d3 01 00 00 48 b8 00 00 00 00 01 00 00 00 83 05 b2 3a 3f 17 01 45 31 ff 49 63 e9 48 89 1d c5 3a 3f 17 48 89 05 be ba 3f 17 <4d> 85 ff 0f 84 20 01 00 00 49 8b 47 30 48 85 c0 0f 84 13 01 00 00
+RSP: 0018:ffa00000079ff520 EFLAGS: 00000046
+RAX: ffffffff982f9808 RBX: 000000000000037a RCX: 0000000000100c2a
+RDX: ffffffff99c90cb8 RSI: ffa00000079ff5b0 RDI: ffffffff98279bb0
+RBP: 0000000000000030 R08: ffffffff9830a750 R09: 0000000000000378
+R10: ffa00000079ff6b0 R11: 0000000000000000 R12: ffffffff81a0ba80
+R13: ffa00000079ff5b0 R14: ffffffff81a0bb40 R15: ffffffff99c90cb8
+FS:  0000000000000000(0000) GS:ff1100010b31e000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007efd2fd77f00 CR3: 0000000102b3b000 CR4: 0000000000753ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ check_irq_usage+0xb5/0xc80
+ check_prev_add+0xfd/0xe60
+ __lock_acquire+0x1661/0x2110
+ lock_acquire+0x1bf/0x370
+ _raw_spin_lock_irqsave+0x42/0x60
+ debug_object_activate+0x146/0x4b0
+ __mod_timer+0x7f0/0xd10
+ mod_peer_timer+0x13f/0x2c0
+ wg_timers_any_authenticated_packet_traversal+0x9a/0xc0
+ wg_packet_send_handshake_initiation+0x1b9/0x350
+ wg_packet_handshake_send_worker+0x21/0x30
+ process_one_work+0xa9c/0x1dc0
+ worker_thread+0x698/0xeb0
+ kthread+0x395/0x4a0
+ ret_from_fork+0xb11/0xdb0
+ ret_from_fork_asm+0x1a/0x30
+ </TASK>
+NMI backtrace for cpu 3
+CPU: 3 UID: 0 PID: 47 Comm: pr/ttyS0 Tainted: G             L      7.4.0-rc2-kernsight-kasan #1 PREEMPT(full) 
+Tainted: [L]=SOFTLOCKUP
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.15.0-1 04/01/2014
+RIP: 0010:io_serial_out+0x94/0xb0
+Code: 48 8d 7d 40 44 89 e1 48 b8 00 00 00 00 00 fc ff df 48 89 fa d3 e3 48 c1 ea 03 80 3c 02 00 75 1c 66 03 5d 40 44 89 e8 89 da ee <5b> 5d 41 5c 41 5d e9 91 c3 31 06 e8 2c 4a 97 fc eb a0 e8 b5 4a 97
+RSP: 0018:ffa0000000bbf9f0 EFLAGS: 00000002
+RAX: 000000000000002e RBX: 00000000000003f8 RCX: 0000000000000000
+RDX: 00000000000003f8 RSI: ffffffff85baaada RDI: ffffffff9d5d22c0
+RBP: ffffffff9d5d2280 R08: ffffffff85baaacb R09: 0000000000000000
+R10: 0000000000000003 R11: 6174203a4f464e49 R12: 0000000000000000
+R13: 000000000000002e R14: ffa0000000bbfdb0 R15: 0000000000000001
+FS:  0000000000000000(0000) GS:ff1100020dd1e000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f92b64a1000 CR3: 000000010c4c2000 CR4: 0000000000753ef0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff0ff0 DR7: 0000000000000600
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ __serial8250_console_fifo_write+0xef/0x2b0
+ serial8250_console_write+0xf36/0x1380
+ nbcon_emit_next_record+0x679/0xa40
+ nbcon_emit_one+0x1af/0x2c0
+ nbcon_kthread_func+0x646/0x860
+ kthread+0x395/0x4a0
+ ret_from_fork+0xb11/0xdb0
+ ret_from_fork_asm+0x1a/0x30
+ </TASK>
+
+<<<<<<<<<<<<<<< tail report >>>>>>>>>>>>>>>
+
