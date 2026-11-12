@@ -1,9 +1,8 @@
 # INFO: task hung in xlog_grant_head_check (xfs log space starvation, v7.4-rc2)
 
-Syzkaller-found hang bug on Linux v7.4-rc2, reproduced and verified twice
-independently of the fuzzing pipeline: (1) by the pipeline's reproducer
-machinery (collateral reproducer verified on a fresh VM), and (2) by an
-external standalone run on a fresh VM — see "External verification" below.
+Syzkaller-found hang bug on Linux v7.4-rc2, reproduced and verified on the
+same kernel build — see "External verification" below for the standalone
+runs.
 
 ## Summary
 
@@ -46,24 +45,41 @@ built from v7.4-rc2 with CONFIG_KASAN=y, CONFIG_XFS_FS=y, booted with
 the configuration.
 
 The hang depends on log-space state accumulated by preceding programs, so
-the reproducer is an ordered program set:
+the reproducer is an ordered program set (67 programs):
 
 ```sh
 # in the guest, as root:
 syz-execprog -procs=8 -threaded -repeat=0 -executor ./syz-executor repro.kernsight.prog
 ```
 
-`reproducer/repro.kernsight.prog` is the reproducer program set (state
-reconstruction + triggering testcase, in execution order). In the fuzzing
-pipeline it was independently verified on a fresh VM (the collateral
-reproducer was confirmed by the pipeline's verification machinery; see
-`logs/`). A standalone `syz-execprog` run outside the pipeline environment
-has not yet reproduced it (work in progress); the pipeline-verified
-artifacts are authoritative. As a hang-type (rather than panic-type) bug,
-the symptom is the hung-task report above rather than a kernel BUG.
+Run it in a loop (`-repeat=0`) and leave it running. As a hang-type (rather
+than panic-type) bug, the symptom is the hung-task report above rather
+than a kernel BUG, and the guest keeps running after the report — monitor
+the console rather than waiting for a reboot.
+
+## External verification
+
+Reproduced on fresh VMs with the plain command above, **2/2 independent
+fresh-VM runs**, plus the pipeline's own collateral verification on a
+fresh VM (~4 min):
+
+- Run 1: hung-task reports at **315 s after guest boot (~5 min)** —
+  console: `logs/external-verification/external-verification-serial.log`.
+- Run 2: three tasks blocked at **621.7 s after guest boot (~10 min)**,
+  all in `xlog_grant_head_check` — console:
+  `logs/external-verification/external-verification-serial-run2.log`.
+
+Both runs show the same double-hang as the pipeline report (the
+xfs-inodegc kworker and syz worker tasks simultaneously waiting in
+`xlog_grant_head_wait`). Detection record: `logs/external-verification/HIT`;
+run book: `logs/external-verification/runner-run.log`. Note: because the
+guest does not panic, an automated monitor that probes the guest over ssh
+can stall for hours on a hung guest — check the serial console rather
+than relying on guest responsiveness.
 
 `reproducer/repro.prog` is the triggering program set from the pipeline.
-A C reproducer is being prepared and will be added once verified.
+A C reproducer has not been included yet; it will be added once
+syzkaller's C-repro stage passes for this bug.
 
 ## Files
 
