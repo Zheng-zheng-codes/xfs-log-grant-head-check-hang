@@ -38,24 +38,52 @@ objects whose reclamation is blocked.
 
 ## How to reproduce
 
-Environment: Debian trixie x86_64 guest (6 GiB RAM, 4 vCPU, KVM), kernel
-built from v7.4-rc2 with CONFIG_KASAN=y, CONFIG_XFS_FS=y, booted with
-`panic_on_warn=1` (hung_task reporting enabled; `hung_task_panic=0`). See
-`environment.txt` for the exact QEMU command line and `kernel.config` for
-the configuration.
+### Prerequisites
 
-The hang depends on log-space state accumulated by preceding programs, so
-the reproducer is an ordered program set (67 programs):
+1. Boot a Debian trixie x86_64 VM (6 GiB RAM, 4 vCPU, KVM) using the QEMU
+   command line in `environment.txt`, with the kernel built from v7.4-rc2
+   (see `kernel.config`; CONFIG_KASAN=y, CONFIG_XFS_FS=y).
+2. Copy `syz-execprog` and `syz-executor` (built from syzkaller commit
+   `853b104bb454141a5b0fc0e4218ec78e9f34ffb1`) into the guest.
+3. Copy `reproducer/repro.kernsight.prog` into the guest.
+
+### Run
+
+In the guest, as root:
 
 ```sh
-# in the guest, as root:
 syz-execprog -procs=8 -threaded -repeat=0 -executor ./syz-executor repro.kernsight.prog
 ```
 
-Run it in a loop (`-repeat=0`) and leave it running. As a hang-type (rather
-than panic-type) bug, the symptom is the hung-task report above rather
-than a kernel BUG, and the guest keeps running after the report — monitor
-the console rather than waiting for a reboot.
+**`-repeat=0` is critical**: syz-execprog will execute the 67-program set
+in an infinite loop. Each pass consumes XFS log transactions; the bug
+requires log grant space to be gradually exhausted by repeated passes.
+A single pass will not reproduce the hang.
+
+### What you will see
+
+After **~5-10 minutes** the serial console (or `dmesg`) will show:
+
+```
+INFO: task kworker/... blocked for more than 143 seconds.
+ xlog_grant_head_wait+0x144/0xd00 fs/xfs/xfs_log.c:217
+ xlog_grant_head_check+0x387/0x610 fs/xfs/xfs_log.c:273
+INFO: task syz.N.NNN:NNNNN blocked for more than 143 seconds.
+ xlog_grant_head_check+0x57f/0x610 fs/xfs/xfs_log.c:279
+```
+
+The guest does **not** panic or reboot — it stays alive with tasks in D
+state. Monitor the serial console (or `dmesg`) for the hung-task reports
+rather than waiting for a reboot.
+
+### Why `-repeat=0` (loop form) is required
+
+Each pass through the 67-program set issues a batch of XFS transactions
+that consume log grant space. The bug causes some of that space to be
+accounted but never fully released. After enough passes the grant head
+stops moving forward and waiters accumulate — this is a cumulative
+resource-exhaustion hang, not a single-shot race. A single pass through
+the program set does not consume enough log space to trigger it.
 
 ## External verification
 
